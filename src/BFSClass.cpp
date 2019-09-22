@@ -120,7 +120,8 @@ void BFSTree::CreateTree(string inputStr, string outputStr, int num)
 	while(n < treeSize){
 		/*
 		 * for num number of actions,
-		 * find the next possible states/nodes.
+		 * expand node n to find the next 
+		 * possible states/nodes.
 		 */
 		for(i=1; i<=num; i++){
 			flipedStr = flip(NodeValue[n], i);
