@@ -157,6 +157,6 @@ void AStarTree::TraverseTree(string inputStr, string outputStr, int num)
 		if(i<=num)
 			break;
 	}
-	cout << "Output:\n";
+	cout << "\nOutput:\n";
 	PrintShortestPath(GoalNode, cost[GoalNode]);
 }

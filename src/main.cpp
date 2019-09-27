@@ -1,45 +1,43 @@
 #include "BFSClass.h"
 #include "AStarClass.h"
 #include "helpers.h"
-
-#define ASTAR_SUPPORT 1
+#include <regex>
 
 int main()
 {
 	string str;
-	int n;
-	cout << "Please Enter the no. of pancakes: (n)\n";
-	cin  >> n;
+	int n=4;
+	regex astar("(([1-4])([b|w])){4}(-a)$"), bfs("(([1-4])([b|w])){4}$");
+	do {
 	
-	cout << "Please Enter the order of pancakes in following format,\n";
-	cout << "Pancake ID which is consistent with its size: (1-n) followed by b/w depending on the front side of pancake is burnt (b) or white (w) \n";
-	cout << "e.g. 1b2b3b4w \n"; 
-	cin >> str;
+		cout << "\nPlease Enter the order of pancakes in following format,\n";
+		cout << "Pancake ID, consistent with its size: (1-4) followed by b or w\n" << 
+			"depending on the front side of pancake is burnt (b) or white (w)\n" <<
+			"End the string with -a for A* algorithm and nothing for BFS\n";
+		cout << "e.g. 1b2b3b4w-a will use A* and  1b2b3b4w will use BFS  \n"; 
+		cin >> str;
 
-	cout << "Please select algorithm: \n 1.A* 2.BFS\n";
-	int opt;
-	cin >> opt;
-	
-	switch(opt){
-		case 1:
-			{	
-#if ASTAR_SUPPORT
-				AStarTree t;
-				t.TraverseTree(str,  CreateOutputString(n), n);
-#else
-				cout<< "Currently Work in progress\n";
-#endif
-			}
-			break;
-		case 2:
-			{
-				BFSTree t(n);
-				t.CreateTree(str, CreateOutputString(n), n);
-			}
-			break;
-		default:
-			cout<< "Invalid Option\n";
-			break;
+		if( regex_match(str, astar) ) {
+			str = str.substr(0, str.size() - 2);	
+			AStarTree t;
+			t.TraverseTree(str,  CreateOutputString(n), n);
+			goto ask_option;
+		} 
+		
+		if ( regex_match(str, bfs) ){
+			BFSTree t(n);
+			t.CreateTree(str, CreateOutputString(n), n);
+			goto ask_option;
+		}
 
-	}
+		cout << "Invalid input, please provide the input in specified format.\n";
+		
+ask_option:		
+		cout << "\nDo you want to continue: y | n?";
+		char ch;
+		cin >> ch;
+		if(ch == 'n')
+			exit(0);
+	} while(1);
+
 }
