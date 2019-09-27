@@ -20,13 +20,17 @@ int main()
 		if( regex_match(str, astar) ) {
 			str = str.substr(0, str.size() - 2);	
 			AStarTree t;
-			t.TraverseTree(str,  CreateOutputString(n), n);
+			t.TraverseTree(str, CreateOutputString(n), n);
 			goto ask_option;
 		} 
 		
 		if ( regex_match(str, bfs) ){
+#if 0			
 			BFSTree t(n);
 			t.CreateTree(str, CreateOutputString(n), n);
+#endif
+			BFSTree t;
+			t.TraverseTree(str, CreateOutputString(n), n);
 			goto ask_option;
 		}
 
