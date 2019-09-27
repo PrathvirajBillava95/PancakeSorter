@@ -1,17 +1,54 @@
 #include "AStarClass.h"
 #include "helpers.h"
 
+int max(int a, int b)
+{
+	if(a>b)
+		return a;
+	else
+		return b;
+}
+
 int AStarTree::CalculateHeuristics(string str, int n)
 {
-	int h = 0;
+	int h = 0, k = 0;
 	char digits[] = {'1', '2', '3', '4', '5', '6', '7', '8', '9' };
 	for(int i =0 , j=0; i<(2*n); i+=2, j++) {
 		if(str[i] != digits[j])
-			h++;
+			h = j+1;
 		if(str[i+1] == 'b')
-			h++;
+			k++;
 	}
-	return h;
+	return max(h, k);
+}
+
+int AStarTree::HandleTieBreaker(int i, int j)
+{
+	int num1, num2;
+	string temp[2];
+
+	temp[0] = NodeValue[i];
+	temp[1] = NodeValue[j];
+	
+	for(int k=1; k<NodeValue[i].size(); k+=2) {
+		if(NodeValue[i][k] == 'b')
+			temp[0][k] = '0';
+		else if(NodeValue[i][k] == 'w')
+			temp[0][k] = '1';
+
+		if(NodeValue[j][k] == 'b')
+			temp[1][k] = '0';
+		else if(NodeValue[j][k] == 'w')
+			temp[1][k] = '1';
+	}
+
+	num1 = stoi(temp[0], 0, 10);
+	num2 = stoi(temp[1], 0, 10);
+
+	if(num1 < num2)
+		return i;
+	else
+		return j;
 }
 
 void AStarTree::SortMinFnValue(list<int> &q)
@@ -33,6 +70,15 @@ void AStarTree::SortMinFnValue(list<int> &q)
 			a[i] = a[0];
 			a[0] = min;
 			min = fn[min];
+		} else if(fn[a[i]] == min) {
+			 min = HandleTieBreaker(a[0], a[i]);
+			 if(min != a[0]) {
+				min = a[i];
+			 	a[i] = a[0];
+			 	a[0] = min;
+			 }
+				 
+			 min = fn[min];
 		}
 	}
 

@@ -26,6 +26,7 @@ public:
 	int CalculateHeuristics(string str, int n);
 	void SortMinFnValue(list<int> &q);
 	void PrintShortestPath(int w, int c);
+	int HandleTieBreaker(int i, int j);
 	bool CheckIfVisited(string &str);
 	void TraverseTree(string inputStr, string outputStr, int num);
 
