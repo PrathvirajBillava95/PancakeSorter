@@ -1,3 +1,11 @@
+/*
+ * Pancake sorter using BFS and AStar algorithms
+ * Author: Prathviraj Billava
+ *
+ * BFSClass.cpp :  BFS class member functions definitions
+ *
+ */
+ 
 #include "BFSClass.h"
 #include "helpers.h"
 
