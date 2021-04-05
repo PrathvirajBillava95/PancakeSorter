@@ -1,3 +1,12 @@
+/*
+ * Pancake sorter using BFS and AStar algorithms
+ * Author: Prathviraj Billava
+ *
+ * main.cpp :  breadth-first search and A* search algorithms using C++ 
+ * to solve the Pancake sorting problem
+ *
+ */
+ 
 #include "BFSClass.h"
 #include "AStarClass.h"
 #include "helpers.h"
