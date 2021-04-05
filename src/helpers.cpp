@@ -1,3 +1,11 @@
+/*
+ * Pancake sorter using BFS and AStar algorithms
+ * Author: Prathviraj Billava
+ *
+ * helper.cpp : helper functions definitions
+ *
+ */
+ 
 #include <string>
 
 using namespace std;
